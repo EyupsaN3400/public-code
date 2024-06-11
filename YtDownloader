@@ -1,0 +1,19 @@
+import pytube
+
+url = input('Enter video url : ')
+def progress_func(stream, chunk, bytes_remaining):
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    percentage = (bytes_downloaded / total_size) * 100
+    print(f"download %{percentage:.2f} Successful.")
+
+def complete_func(stream, file_handle):
+    print("download Successful.")
+
+yt = pytube.YouTube(
+    url,
+    on_progress_callback=progress_func,
+    on_complete_callback=complete_func,
+)
+path = ""
+yt.streams.get_highest_resolution().download(path)
