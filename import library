@@ -1,0 +1,10 @@
+import requests
+from bs4 import BeautifulSoup
+
+
+url = requests.get('https://github.com/EyupsaN3400')
+soup = BeautifulSoup(url.content, 'html.parser')
+
+title = soup.title.string
+
+print(title)
